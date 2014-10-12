@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="sensingDataBoInt" class="com.mkyong.customer.bo.impl.SensingDataBo">
+		<property name="sensingDataHomeInt" ref="sensingDataHomeInt" />
+	</bean>
+
+	<bean id="sensingDataHomeInt" class="com.mkyong.customer.dao.impl.SensingDataHome">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans>

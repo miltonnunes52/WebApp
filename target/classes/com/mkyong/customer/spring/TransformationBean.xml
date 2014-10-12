@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="transformationBoInt" class="com.mkyong.customer.bo.impl.TransformationBo">
+		<property name="transformationHomeInt" ref="transformationHomeInt" />
+	</bean>
+
+	<bean id="transformationHomeInt" class="com.mkyong.customer.dao.impl.TransformationHome">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans>

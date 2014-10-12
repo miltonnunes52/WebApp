@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<bean id="realBoInt" class="com.mkyong.customer.bo.impl.RealBo">
+		<property name="realHomeInt" ref="realHomeInt" />
+	</bean>
+
+	<bean id="realHomeInt" class="com.mkyong.customer.dao.impl.RealHome">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+</beans>

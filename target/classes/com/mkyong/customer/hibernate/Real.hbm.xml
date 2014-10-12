@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/Out/2014 16:19:17 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mkyong.customer.model.Real" table="real" catalog="CAMCoF">
+        <id name="idReal" type="java.lang.Integer">
+            <column name="idReal" />
+            <generator class="identity" />
+        </id>
+        <property name="description" type="string">
+            <column name="description" length="45" />
+        </property>
+        <property name="timeCreation" type="string">
+            <column name="timeCreation" length="45" />
+        </property>
+        <property name="dataContextIdDataContext" type="int">
+            <column name="Data_context_idData_context" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

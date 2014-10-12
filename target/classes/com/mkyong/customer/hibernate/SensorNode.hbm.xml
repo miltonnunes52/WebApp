@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/Out/2014 16:19:17 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mkyong.customer.model.SensorNode" table="sensor_node" catalog="CAMCoF">
+        <id name="idSensorNode" type="java.lang.Integer">
+            <column name="idSensor_node" />
+            <generator class="identity" />
+        </id>
+        <property name="description" type="string">
+            <column name="description" length="45" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="45" />
+        </property>
+        <property name="sensorIdSensor" type="int">
+            <column name="Sensor_idSensor" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

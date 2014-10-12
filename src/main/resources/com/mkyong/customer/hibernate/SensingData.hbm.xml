@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/Out/2014 16:19:17 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mkyong.customer.model.SensingData" table="sensing_data" catalog="CAMCoF">
+        <composite-id name="id" class="SensingDataId">
+            <key-property name="idSensing" type="int">
+                <column name="idSensing" />
+            </key-property>
+            <key-property name="sensorNodeIdSensorNode" type="int">
+                <column name="Sensor_node_idSensor_node" />
+            </key-property>
+        </composite-id>
+        <property name="timeCreation" type="string">
+            <column name="timeCreation" length="45" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="45" />
+        </property>
+        <property name="resourceAddress" type="string">
+            <column name="resourceAddress" length="45" />
+        </property>
+        <property name="classificationTagsIdClassificationTags" type="int">
+            <column name="Classification_tags_idClassification_tags" not-null="true" />
+        </property>
+        <property name="transformationLevelIdTransformationLevel" type="int">
+            <column name="Transformation_level_idTransformation_level" not-null="true" />
+        </property>
+        <property name="userProfileIdUserProfile" type="int">
+            <column name="User_profile_idUser_profile" not-null="true" />
+        </property>
+        <property name="dataContextIdDataContext" type="int">
+            <column name="Data_context_idData_context" not-null="true" />
+        </property>
+        <property name="timeEnd" type="string">
+            <column name="timeEnd" length="45" />
+        </property>
+    </class>
+</hibernate-mapping>

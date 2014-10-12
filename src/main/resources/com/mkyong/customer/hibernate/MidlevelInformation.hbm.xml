@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 10/Out/2014 16:19:17 by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="com.mkyong.customer.model.MidlevelInformation" table="midlevel_information" catalog="CAMCoF">
+        <id name="idMidlevelInformation" type="java.lang.Integer">
+            <column name="idMidlevel_information" />
+            <generator class="identity" />
+        </id>
+        <property name="description" type="string">
+            <column name="description" length="45" />
+        </property>
+        <property name="feature" type="string">
+            <column name="feature" length="45" />
+        </property>
+        <property name="highlevelIdHighlevel" type="int">
+            <column name="Highlevel_idHighlevel" not-null="true" />
+        </property>
+        <property name="dataContextIdDataContext" type="int">
+            <column name="Data_context_idData_context" not-null="true" />
+        </property>
+        <property name="sensingDataIdSensing" type="int">
+            <column name="Sensing_data_idSensing" not-null="true" />
+        </property>
+        <property name="sensingDataSensorNodeIdSensorNode" type="int">
+            <column name="Sensing_data_Sensor_node_idSensor_node" not-null="true" />
+        </property>
+        <property name="metricsIdMetrics" type="int">
+            <column name="Metrics_idMetrics" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
