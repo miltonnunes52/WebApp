@@ -20,4 +20,6 @@ public interface SensorHomeInt {
 
 	List<Sensor> findByExample(Sensor instance);
 
+	List<Sensor> getAll();
+
 }

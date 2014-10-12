@@ -19,7 +19,6 @@ public class MetricsBean implements Serializable {
 	}
 
 	public List<Metrics> getAll() {
-		System.out.println("aqui!!!!!");
 		return getMetricsBoInt().getAll();
 
 	}

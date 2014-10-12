@@ -21,5 +21,24 @@
 			<value>#{metricsBoInt}</value>
 		</managed-property>
 	</managed-bean>
+	
+	<managed-bean>
+		<managed-bean-name>sensor</managed-bean-name>
+		<managed-bean-class>com.mkyong.SensorBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>sensorBoInt</property-name>
+			<value>#{sensorBoInt}</value>
+		</managed-property>
+	</managed-bean>
  
+ 	<managed-bean>
+		<managed-bean-name>userProfile</managed-bean-name>
+		<managed-bean-class>com.mkyong.UserProfileBean</managed-bean-class>
+		<managed-bean-scope>session</managed-bean-scope>
+		<managed-property>
+			<property-name>userProfileBoInt</property-name>
+			<value>#{userProfileBoInt}</value>
+		</managed-property>
+	</managed-bean>
 </faces-config>

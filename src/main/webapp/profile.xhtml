@@ -142,7 +142,7 @@
 		<hr />
 		<h3>Monitorização</h3>
 		<ul class="toggle">
-					<li class="icn_categories"><a href="panel.xhtml">Painel</a></li>
+			<li class="icn_categories"><a href="panel.xhtml">Painel</a></li>
 			<li class="icn_edit_article"><a href="graphs.xhtml">Gráficos</a></li>
 			<li class="icn_categories"><a href="table.xhtml">Tabelas</a></li>
 			<li class="icn_settings"><a href="usersensors.xhtml">Sensores
@@ -186,35 +186,45 @@
 				<div class="grid_10">
 					<div class="box round first">
 						<div class="block ">
-							<form>
+
+
+
+							<h:form>
+
+<h:commandButton value="teste"
+											action="#{userProfile.findProfile()}" />
 								<table class="form">
 
-									
+
 
 									<tr>
 										<td><label>Username</label></td>
-										<td><input type="text" class="mini" value="miltonnunes" /></td>
+										<td><h:inputText id="username"
+												value="#{userProfile.user.username}" /></td>
 									</tr>
 
 									<tr>
 										<td><label>Password</label></td>
-										<td><input type="password" class="mini" value="********" /></td>
+										<td><h:inputText id="password"
+												value="#{userProfile.user.password}" /></td>
 									</tr>
 
 									<tr>
 										<td><label>Número de Monitorizações</label></td>
-										<td><input type="text" class="mini" value="16" /></td>
+										<td><h:inputText value="Falta isto!" /></td>
 									</tr>
 
 
 									<tr>
-										<input type="submit" value="Guardar" align="right" />
+
+										<h:commandButton value="Guardar"
+											action="#{userProfile.saveProfile()}" />
 									</tr>
 
 
 
 								</table>
-							</form>
+							</h:form>
 						</div>
 					</div>
 

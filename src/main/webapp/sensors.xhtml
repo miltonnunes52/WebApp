@@ -202,36 +202,18 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>125</td>
-								<td>Rato</td>
-								<td>5</td>
-								<td>26</td>
-							</tr>
-							<tr>
-								<td>345</td>
-								<td>Rato</td>
-								<td>8</td>
-								<td>6</td>
-							</tr>
-							<tr>
-								<td>167</td>
-								<td>Teclado</td>
-								<td>5</td>
-								<td>14</td>
-							</tr>
-							<tr>
-								<td>389</td>
-								<td>Acelarometro</td>
-								<td>10</td>
-								<td>20</td>
-							</tr>
-							<tr>
-								<td>15</td>
-								<td>Teclado</td>
-								<td>5</td>
-								<td>11</td>
-							</tr>
+							<ui:repeat var="s" value="#{sensor.getAll()}">
+
+								<tr>
+
+									<td>#{s.sensorIdentifier}</td>
+									<td>#{s.type}</td>
+									<td>#{s.dataPeriodicity}</td>
+									<td>Falta isto!</td>
+
+
+								</tr>
+							</ui:repeat>
 						</tbody>
 					</table>
 				</div>

@@ -9,5 +9,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
  
 	<!-- Beans Declaration -->
 	<import resource="classes/com/mkyong/customer/spring/MetricsBean.xml"/>
+	<import resource="classes/com/mkyong/customer/spring/SensorBean.xml"/>
+	<import resource="classes/com/mkyong/customer/spring/UserProfileBean.xml"/>
  
 </beans>

@@ -20,4 +20,6 @@ public interface UserProfileBoInt {
 
 	List<UserProfile> findByExample(UserProfile instance);
 
+	List<UserProfile> getAll();
+
 }

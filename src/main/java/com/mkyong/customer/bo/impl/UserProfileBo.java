@@ -51,4 +51,9 @@ public class UserProfileBo implements UserProfileBoInt {
 		return userProfileHomeInt.findByExample(instance);
 	}
 
+	@Override
+	public List<UserProfile> getAll() {
+		return userProfileHomeInt.getAll();
+	}
+
 }

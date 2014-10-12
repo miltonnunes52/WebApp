@@ -3,16 +3,12 @@ package com.mkyong.customer.dao.impl;
 // default package
 // Generated 10/Out/2014 16:22:13 by Hibernate Tools 3.6.0
 
-import static org.hibernate.criterion.Example.create;
-
 import java.util.List;
-
-import javax.naming.InitialContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.mkyong.customer.dao.SensorHomeInt;
 import com.mkyong.customer.model.Sensor;
@@ -23,22 +19,9 @@ import com.mkyong.customer.model.Sensor;
  * @see .Sensor
  * @author Hibernate Tools
  */
-public class SensorHome implements SensorHomeInt {
+public class SensorHome extends HibernateDaoSupport implements SensorHomeInt {
 
 	private static final Log log = LogFactory.getLog(SensorHome.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -51,7 +34,7 @@ public class SensorHome implements SensorHomeInt {
 	public void persist(Sensor transientInstance) {
 		log.debug("persisting Sensor instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getHibernateTemplate().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -70,7 +53,7 @@ public class SensorHome implements SensorHomeInt {
 	public void attachDirty(Sensor instance) {
 		log.debug("attaching dirty Sensor instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getHibernateTemplate().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -89,7 +72,7 @@ public class SensorHome implements SensorHomeInt {
 	public void attachClean(Sensor instance) {
 		log.debug("attaching clean Sensor instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getHibernateTemplate().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -108,7 +91,7 @@ public class SensorHome implements SensorHomeInt {
 	public void delete(Sensor persistentInstance) {
 		log.debug("deleting Sensor instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getHibernateTemplate().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -127,7 +110,7 @@ public class SensorHome implements SensorHomeInt {
 	public Sensor merge(Sensor detachedInstance) {
 		log.debug("merging Sensor instance");
 		try {
-			Sensor result = (Sensor) sessionFactory.getCurrentSession().merge(
+			Sensor result = (Sensor) getHibernateTemplate().merge(
 					detachedInstance);
 			log.debug("merge successful");
 			return result;
@@ -146,8 +129,7 @@ public class SensorHome implements SensorHomeInt {
 	public Sensor findById(java.lang.Integer id) {
 		log.debug("getting Sensor instance with id: " + id);
 		try {
-			Sensor instance = (Sensor) sessionFactory.getCurrentSession().get(
-					"Sensor", id);
+			Sensor instance = (Sensor) getHibernateTemplate().get("Sensor", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -171,9 +153,23 @@ public class SensorHome implements SensorHomeInt {
 	public List<Sensor> findByExample(Sensor instance) {
 		log.debug("finding Sensor instance by example");
 		try {
-			List<Sensor> results = (List<Sensor>) sessionFactory
-					.getCurrentSession().createCriteria("Sensor")
-					.add(create(instance)).list();
+			List<Sensor> results = (List<Sensor>) getHibernateTemplate()
+					.findByExample(instance);
+			log.debug("find by example successful, result size: "
+					+ results.size());
+			return results;
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public List<Sensor> getAll() {
+		log.debug("finding Sensor instance by example");
+		try {
+			List<Sensor> results = (List<Sensor>) getHibernateTemplate().find(
+					"From Sensor");
 			log.debug("find by example successful, result size: "
 					+ results.size());
 			return results;

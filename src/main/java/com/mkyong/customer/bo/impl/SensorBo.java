@@ -51,4 +51,9 @@ public class SensorBo implements SensorBoInt {
 		return sensorHomeInt.findByExample(instance);
 	}
 
+	@Override
+	public List<Sensor> getAll() {
+		return sensorHomeInt.getAll();
+	}
+
 }
