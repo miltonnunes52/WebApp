@@ -179,4 +179,20 @@ public class MetricsHome extends HibernateDaoSupport implements MetricsHomeInt {
 			throw re;
 		}
 	}
+
+	@Override
+	public int count() {
+		log.debug("count");
+		try {
+
+			List<Metrics> results = (List<Metrics>) getHibernateTemplate()
+					.find("From Metrics");
+			log.debug("find by example successful, result size: " + results);
+
+			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
 }

@@ -56,4 +56,34 @@ public class SensorBo implements SensorBoInt {
 		return sensorHomeInt.getAll();
 	}
 
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return sensorHomeInt.count();
+	}
+
+	@Override
+	public List<Sensor> getSensorbyUser(Integer user) {
+		// TODO Auto-generated method stub
+		return sensorHomeInt.getSensorbyUser(user);
+	}
+
+	@Override
+	public int countByUser(Integer user, Integer sensor) {
+		// TODO Auto-generated method stub
+		return sensorHomeInt.countByUser(user, sensor);
+	}
+
+	@Override
+	public int countSensorsByUser(Integer user) {
+		// TODO Auto-generated method stub
+		return sensorHomeInt.countSensorsByUser(user);
+	}
+
+	@Override
+	public int countTypesByUser(Integer user) {
+		// TODO Auto-generated method stub
+		return sensorHomeInt.countTypesByUser(user);
+	}
+
 }

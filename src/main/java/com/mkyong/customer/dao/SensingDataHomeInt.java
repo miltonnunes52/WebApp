@@ -21,4 +21,12 @@ public interface SensingDataHomeInt {
 
 	List<SensingData> findByExample(SensingData instance);
 
+	int count();
+
+	List<SensingData> findActiveSensing();
+
+	int countByUser(Integer user);
+
+	int countBySensor(Integer sensor);
+
 }

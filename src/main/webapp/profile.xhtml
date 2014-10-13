@@ -191,22 +191,18 @@
 
 							<h:form>
 
-<h:commandButton value="teste"
-											action="#{userProfile.findProfile()}" />
 								<table class="form">
-
-
 
 									<tr>
 										<td><label>Username</label></td>
 										<td><h:inputText id="username"
-												value="#{userProfile.user.username}" /></td>
+												value="#{login.userLogin.username}" /></td>
 									</tr>
 
 									<tr>
 										<td><label>Password</label></td>
 										<td><h:inputText id="password"
-												value="#{userProfile.user.password}" /></td>
+												value="#{login.userLogin.password}" /></td>
 									</tr>
 
 									<tr>
@@ -216,9 +212,8 @@
 
 
 									<tr>
-
-										<h:commandButton value="Guardar"
-											action="#{userProfile.saveProfile()}" />
+										<td><h:commandButton value="Guardar"
+												action="#{login.saveProfile()}" /></td>
 									</tr>
 
 

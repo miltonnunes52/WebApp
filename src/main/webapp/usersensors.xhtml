@@ -200,24 +200,18 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>125</td>
-								<td>Rato</td>
-								<td>5</td>
-								<td>26</td>
-							</tr>
-							<tr>
-								<td>167</td>
-								<td>Teclado</td>
-								<td>5</td>
-								<td>14</td>
-							</tr>
-							<tr>
-								<td>389</td>
-								<td>Acelarometro</td>
-								<td>10</td>
-								<td>20</td>
-							</tr>
+							<ui:repeat var="s" value="#{sensor.getSensorbyUser(login.id)}">
+
+								<tr>
+
+									<td>#{s.sensorIdentifier}</td>
+									<td>#{s.type}</td>
+									<td>#{s.dataPeriodicity}</td>
+									<td>#{sensor.countByUser(login.id,s.idSensor)}</td>
+
+
+								</tr>
+							</ui:repeat>
 						</tbody>
 					</table>
 				</div>

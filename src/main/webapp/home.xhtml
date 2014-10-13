@@ -142,7 +142,7 @@
 		<hr />
 		<h3>Monitorização</h3>
 		<ul class="toggle">
-					<li class="icn_categories"><a href="panel.xhtml">Painel</a></li>
+			<li class="icn_categories"><a href="panel.xhtml">Painel</a></li>
 			<li class="icn_edit_article"><a href="graphs.xhtml">Gráficos</a></li>
 			<li class="icn_categories"><a href="table.xhtml">Tabelas</a></li>
 			<li class="icn_settings"><a href="usersensors.xhtml">Sensores
@@ -212,7 +212,10 @@
 						<p>
 							<strong>Nº Sensores Utilizados: </strong>
 						</p>
-						<p>4</p>
+						<p>
+							<h:outputLabel value="#{sensor.countSensorsByUser(login.id)}" />
+
+						</p>
 
 
 
@@ -222,7 +225,10 @@
 						<p>
 							<strong>Nº Monitorizações: </strong>
 						</p>
-						<p>16</p>
+						<p>
+							<h:outputLabel value="#{sensingData.countByUser(login.id)}" />
+
+						</p>
 
 
 
@@ -232,7 +238,10 @@
 						<p>
 							<strong>Nº Tipos de Dados: </strong>
 						</p>
-						<p>3</p>
+						<p>
+							<h:outputLabel value="#{sensor.countTypesByUser(login.id)}" />
+
+						</p>
 
 
 

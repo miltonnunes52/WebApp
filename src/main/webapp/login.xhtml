@@ -1,0 +1,32 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core">
+ 
+<h:head>
+    <title>Login input</title>
+</h:head>
+ 
+<h:body>
+    <fieldset>
+        <legend>Enter you login data</legend>
+        <h:form>
+            <table>
+                <tr align="left">
+                    <th>Username</th>
+                    <th><h:inputText value="#{login.username}" /></th>
+                </tr>
+                <tr align="left">
+                    <th>Password</th>
+                    <th><h:inputSecret value="#{login.password}" /></th>
+                </tr>
+                <tr align="left">
+                    <th><h:commandButton value="Submit" action="#{login.doLogin()}" />
+                    </th>
+                </tr>
+            </table>
+        </h:form>
+    </fieldset>
+</h:body>
+ 
+</html>

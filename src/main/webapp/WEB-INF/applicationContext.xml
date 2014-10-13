@@ -11,5 +11,8 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<import resource="classes/com/mkyong/customer/spring/MetricsBean.xml"/>
 	<import resource="classes/com/mkyong/customer/spring/SensorBean.xml"/>
 	<import resource="classes/com/mkyong/customer/spring/UserProfileBean.xml"/>
- 
+	<import resource="classes/com/mkyong/customer/spring/LoginBean.xml"/>
+	<import resource="classes/com/mkyong/customer/spring/SensingDataBean.xml"/> 
+	<import resource="classes/com/mkyong/customer/spring/SensorNodeBean.xml"/>
+	
 </beans>

@@ -10,7 +10,9 @@ public class UserProfileBean implements Serializable {
 
 	private UserProfileBoInt userProfileBoInt;
 
-	private UserProfile user = new UserProfile("asas", "123");
+	private UserProfile user;
+
+	private String userid;
 
 	public UserProfileBoInt getUserProfileBoInt() {
 		return userProfileBoInt;
@@ -42,6 +44,23 @@ public class UserProfileBean implements Serializable {
 
 	public void setUser(UserProfile user) {
 		this.user = user;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public int count() {
+		return getUserProfileBoInt().count();
+	}
+
+	public UserProfile getProfile(int id) {
+		return getUserProfileBoInt().findById(id);
+
 	}
 
 }

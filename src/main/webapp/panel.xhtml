@@ -142,7 +142,7 @@
 		<hr />
 		<h3>Monitorização</h3>
 		<ul class="toggle">
-					<li class="icn_categories"><a href="home.xhtml">Painel</a></li>
+			<li class="icn_categories"><a href="home.xhtml">Painel</a></li>
 			<li class="icn_edit_article"><a href="graphs.xhtml">Gráficos</a></li>
 			<li class="icn_categories"><a href="table.xhtml">Tabelas</a></li>
 			<li class="icn_settings"><a href="usersensors.xhtml">Sensores
@@ -220,27 +220,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>andrep</td>
-								<td>23.254.108.135:999/mouse/red</td>
-								<td>125</td>
-								<td>Rato</td>
-								<td>04-09-2014 13:14</td>
-							</tr>
-							<tr>
-								<td>andrep</td>
-								<td>23.254.108.135:999/keyboard/red</td>
-								<td>167</td>
-								<td>Teclado</td>
-								<td>04-09-2014 13:16</td>
-							</tr>
-							<tr>
-								<td>carlosd67</td>
-								<td>23.254.114.148:999/mouse/test45</td>
-								<td>15</td>
-								<td>Rato</td>
-								<td>04-09-2014 11:37</td>
-							</tr>
+							<ui:repeat var="s" value="#{sensingData.sensoresAtivos()}">
+
+								<tr>
+
+									<td>#{userProfile.getProfile(s.userProfileIdUserProfile).username}</td>
+									<td>#{s.resourceAddress}</td>
+									<td>#{sensor.getSensor(sensorNode.findSensorNodeById(s.id.sensorNodeIdSensorNode).sensorIdSensor).sensorIdentifier}</td>
+									<td>#{sensor.getSensor(sensorNode.findSensorNodeById(s.id.sensorNodeIdSensorNode).sensorIdSensor).type}</td>
+									<td>#{s.timeCreation}</td>
+
+
+								</tr>
+							</ui:repeat>
+
+
 						</tbody>
 					</table>
 				</div>
@@ -264,14 +258,18 @@
 						<p>
 							<strong>Nº Utilizadores: </strong>
 						</p>
-						<p>8</p>
+						<p>
+							<h:outputLabel value="#{userProfile.count()}" />
+						</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Nº Sensores: </strong>
 						</p>
-						<p>5</p>
+						<p>
+							<h:outputLabel value="#{sensor.count()}" />
+						</p>
 					</div>
 
 					<div class="message">
@@ -279,21 +277,27 @@
 						<p>
 							<strong>Nº de métricas: </strong>
 						</p>
-						<p>17</p>
+						<p>
+							<h:outputLabel value="#{metrics.count()}" />
+						</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Nº Monitorizações: </strong>
 						</p>
-						<p>76</p>
+						<p>
+							<h:outputLabel value="#{sensingData.count()}" />
+						</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Média Monitorizações/Utilizador: </strong>
 						</p>
-						<p>9.5</p>
+						<p>
+							<h:outputLabel value="#{sensingData.count()/userProfile.count()}" />
+						</p>
 					</div>
 				</div>
 			</div>

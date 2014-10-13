@@ -4,7 +4,7 @@
 <!-- Generated 10/Out/2014 16:19:17 by Hibernate Tools 3.6.0 -->
 <hibernate-mapping>
     <class name="com.mkyong.customer.model.SensingData" table="sensing_data" catalog="CAMCoF">
-        <composite-id name="id" class="SensingDataId">
+        <composite-id name="id" class="com.mkyong.customer.model.SensingDataId">
             <key-property name="idSensing" type="int">
                 <column name="idSensing" />
             </key-property>

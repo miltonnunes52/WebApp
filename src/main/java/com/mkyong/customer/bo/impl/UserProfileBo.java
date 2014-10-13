@@ -56,4 +56,13 @@ public class UserProfileBo implements UserProfileBoInt {
 		return userProfileHomeInt.getAll();
 	}
 
+	@Override
+	public UserProfile getCredentials(String username, String password) {
+		return userProfileHomeInt.getCredentials(username, password);
+	}
+
+	@Override
+	public int count() {
+		return userProfileHomeInt.count();
+	}
 }

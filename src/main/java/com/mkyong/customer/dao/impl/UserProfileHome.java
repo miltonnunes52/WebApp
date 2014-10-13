@@ -129,18 +129,18 @@ public class UserProfileHome extends HibernateDaoSupport implements
 	 */
 	@Override
 	public UserProfile findById(java.lang.Integer id) {
-		log.debug("getting UserProfile instance with id: " + id);
+		log.debug("finding credentials");
 		try {
-			UserProfile instance = (UserProfile) getHibernateTemplate().get(
-					"UserProfile", id);
-			if (instance == null) {
-				log.debug("get successful, no instance found");
-			} else {
-				log.debug("get successful, instance found");
-			}
-			return instance;
+
+			List<UserProfile> results = (List<UserProfile>) getHibernateTemplate()
+					.find("From UserProfile where id=?", id);
+			log.debug("find by example successful, result size: " + results);
+			if (results.size() == 0)
+				return null;
+			else
+				return results.get(0);
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
+			log.error("find by example failed", re);
 			throw re;
 		}
 	}
@@ -176,6 +176,41 @@ public class UserProfileHome extends HibernateDaoSupport implements
 			log.debug("find by example successful, result size: "
 					+ results.size());
 			return results;
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public UserProfile getCredentials(String username, String password) {
+		log.debug("finding credentials");
+		try {
+			Object[] params = { username, password };
+			List<UserProfile> results = (List<UserProfile>) getHibernateTemplate()
+					.find("From UserProfile where username=? and password=?",
+							params);
+			log.debug("find by example successful, result size: " + results);
+			if (results.size() == 0)
+				return null;
+			else
+				return results.get(0);
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public int count() {
+		log.debug("count");
+		try {
+
+			List<UserProfile> results = (List<UserProfile>) getHibernateTemplate()
+					.find("From UserProfile");
+			log.debug("find by example successful, result size: " + results);
+
+			return results.size();
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;

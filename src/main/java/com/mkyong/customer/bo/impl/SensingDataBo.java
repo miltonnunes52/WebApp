@@ -52,4 +52,28 @@ public class SensingDataBo implements SensingDataBoInt {
 		return sensingDataHomeInt.findByExample(instance);
 	}
 
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return sensingDataHomeInt.count();
+	}
+
+	@Override
+	public List<SensingData> findActiveSensing() {
+		// TODO Auto-generated method stub
+		return sensingDataHomeInt.findActiveSensing();
+	}
+
+	@Override
+	public int countByUser(Integer user) {
+		// TODO Auto-generated method stub
+		return sensingDataHomeInt.countByUser(user);
+	}
+
+	@Override
+	public int countBySensor(Integer sensor) {
+		// TODO Auto-generated method stub
+		return sensingDataHomeInt.countBySensor(sensor);
+	}
+
 }

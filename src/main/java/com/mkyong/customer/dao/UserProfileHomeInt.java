@@ -22,4 +22,8 @@ public interface UserProfileHomeInt {
 
 	List<UserProfile> getAll();
 
+	UserProfile getCredentials(String username, String password);
+
+	int count();
+
 }

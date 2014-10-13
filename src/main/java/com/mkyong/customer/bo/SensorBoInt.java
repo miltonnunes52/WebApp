@@ -22,4 +22,14 @@ public interface SensorBoInt {
 
 	List<Sensor> getAll();
 
+	int count();
+
+	List<Sensor> getSensorbyUser(Integer user);
+
+	int countByUser(Integer user, Integer sensor);
+
+	int countSensorsByUser(Integer user);
+
+	int countTypesByUser(Integer user);
+
 }

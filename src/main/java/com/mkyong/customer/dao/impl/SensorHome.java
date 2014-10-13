@@ -127,17 +127,18 @@ public class SensorHome extends HibernateDaoSupport implements SensorHomeInt {
 	 */
 	@Override
 	public Sensor findById(java.lang.Integer id) {
-		log.debug("getting Sensor instance with id: " + id);
+		log.debug("finding credentials");
 		try {
-			Sensor instance = (Sensor) getHibernateTemplate().get("Sensor", id);
-			if (instance == null) {
-				log.debug("get successful, no instance found");
-			} else {
-				log.debug("get successful, instance found");
-			}
-			return instance;
+
+			List<Sensor> results = (List<Sensor>) getHibernateTemplate().find(
+					"From Sensor where id=?", id);
+			log.debug("find by example successful, result size: " + results);
+			if (results.size() == 0)
+				return null;
+			else
+				return results.get(0);
 		} catch (RuntimeException re) {
-			log.error("get failed", re);
+			log.error("find by example failed", re);
 			throw re;
 		}
 	}
@@ -173,6 +174,91 @@ public class SensorHome extends HibernateDaoSupport implements SensorHomeInt {
 			log.debug("find by example successful, result size: "
 					+ results.size());
 			return results;
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public int count() {
+		log.debug("count");
+		try {
+
+			List<Sensor> results = (List<Sensor>) getHibernateTemplate().find(
+					"From Sensor");
+			log.debug("find by example successful, result size: " + results);
+
+			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public List<Sensor> getSensorbyUser(Integer user) {
+		log.debug("count");
+		try {
+
+			List<Sensor> results = (List<Sensor>) getHibernateTemplate()
+					.find("Select distinct s From Sensor s, SensingData sd where s.idSensor = sd.id.sensorNodeIdSensorNode and sd.userProfileIdUserProfile=?",
+							user);
+
+			log.debug("find by example successful, result size: " + results);
+
+			return results;
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public int countByUser(Integer user, Integer sensor) {
+		log.debug("count");
+		try {
+			Object[] params = { user, sensor };
+			List<Sensor> results = (List<Sensor>) getHibernateTemplate()
+					.find("Select sd From SensingData sd, SensorNode sn where sd.userProfileIdUserProfile = ? and sd.id.sensorNodeIdSensorNode = sn.idSensorNode and sn.sensorIdSensor = ?",
+							params);
+			log.debug("find by example successful, result size: " + results);
+
+			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public int countSensorsByUser(Integer user) {
+		log.debug("count");
+		try {
+
+			List<Sensor> results = (List<Sensor>) getHibernateTemplate()
+					.find("Select distinct sn.sensorIdSensor From SensingData sd, SensorNode sn where sd.userProfileIdUserProfile = ? and sd.id.sensorNodeIdSensorNode = sn.idSensorNode",
+							user);
+			log.debug("find by example successful, result size: " + results);
+
+			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public int countTypesByUser(Integer user) {
+		log.debug("count");
+		try {
+
+			List<Sensor> results = (List<Sensor>) getHibernateTemplate()
+					.find("Select distinct s.type From SensingData sd, SensorNode sn, Sensor s where sd.userProfileIdUserProfile = ? and sd.id.sensorNodeIdSensorNode = sn.idSensorNode and sn.sensorIdSensor = s.idSensor",
+							user);
+			log.debug("find by example successful, result size: " + results);
+
+			return results.size();
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;

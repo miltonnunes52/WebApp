@@ -23,4 +23,30 @@ public class SensorBean implements Serializable {
 
 	}
 
+	public int count() {
+		return getSensorBoInt().count();
+	}
+
+	public Sensor getSensor(int id) {
+		return getSensorBoInt().findById(id);
+
+	}
+
+	public List<Sensor> getSensorbyUser(Integer user) {
+		return getSensorBoInt().getSensorbyUser(user);
+	}
+
+	public int countByUser(Integer user, Integer sensor) {
+		return getSensorBoInt().countByUser(user, sensor);
+
+	}
+
+	public int countSensorsByUser(Integer user) {
+		return getSensorBoInt().countSensorsByUser(user);
+	}
+
+	public int countTypesByUser(Integer user) {
+		return getSensorBoInt().countTypesByUser(user);
+	}
+
 }

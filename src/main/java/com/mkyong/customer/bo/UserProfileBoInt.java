@@ -22,4 +22,8 @@ public interface UserProfileBoInt {
 
 	List<UserProfile> getAll();
 
+	UserProfile getCredentials(String username, String password);
+
+	int count();
+
 }

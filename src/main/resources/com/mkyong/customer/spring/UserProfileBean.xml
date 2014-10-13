@@ -12,4 +12,9 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 
+<!-- <bean id="userProfile" -->
+<!--       class="com.mkyong.UserProfileBean"> -->
+<!--     <property name="userid" value="#{login.id}"/>  -->
+<!-- </bean> -->
+
 </beans>

@@ -23,4 +23,8 @@ public class MetricsBean implements Serializable {
 
 	}
 
+	public int count() {
+		return getMetricsBoInt().count();
+	}
+
 }

@@ -55,4 +55,10 @@ public class MetricsBo implements MetricsBoInt {
 	public List<Metrics> getAll() {
 		return metricsHomeInt.getAll();
 	}
+
+	@Override
+	public int count() {
+		// TODO Auto-generated method stub
+		return metricsHomeInt.count();
+	}
 }

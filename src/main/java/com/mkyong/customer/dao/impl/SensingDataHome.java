@@ -3,17 +3,13 @@ package com.mkyong.customer.dao.impl;
 // default package
 // Generated 10/Out/2014 16:22:13 by Hibernate Tools 3.6.0
 
-import static org.hibernate.criterion.Example.create;
-
 import java.io.Serializable;
 import java.util.List;
-
-import javax.naming.InitialContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.hibernate.LockMode;
-import org.hibernate.SessionFactory;
+import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.mkyong.customer.dao.SensingDataHomeInt;
 import com.mkyong.customer.model.SensingData;
@@ -25,22 +21,10 @@ import com.mkyong.customer.model.SensingDataId;
  * @see .SensingData
  * @author Hibernate Tools
  */
-public class SensingDataHome implements SensingDataHomeInt {
+public class SensingDataHome extends HibernateDaoSupport implements
+		SensingDataHomeInt {
 
 	private static final Log log = LogFactory.getLog(SensingDataHome.class);
-
-	private final SessionFactory sessionFactory = getSessionFactory();
-
-	protected SessionFactory getSessionFactory() {
-		try {
-			return (SessionFactory) new InitialContext()
-					.lookup("SessionFactory");
-		} catch (Exception e) {
-			log.error("Could not locate SessionFactory in JNDI", e);
-			throw new IllegalStateException(
-					"Could not locate SessionFactory in JNDI");
-		}
-	}
 
 	/*
 	 * (non-Javadoc)
@@ -53,7 +37,7 @@ public class SensingDataHome implements SensingDataHomeInt {
 	public void persist(SensingData transientInstance) {
 		log.debug("persisting SensingData instance");
 		try {
-			sessionFactory.getCurrentSession().persist(transientInstance);
+			getHibernateTemplate().persist(transientInstance);
 			log.debug("persist successful");
 		} catch (RuntimeException re) {
 			log.error("persist failed", re);
@@ -72,7 +56,7 @@ public class SensingDataHome implements SensingDataHomeInt {
 	public void attachDirty(SensingData instance) {
 		log.debug("attaching dirty SensingData instance");
 		try {
-			sessionFactory.getCurrentSession().saveOrUpdate(instance);
+			getHibernateTemplate().saveOrUpdate(instance);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -91,7 +75,7 @@ public class SensingDataHome implements SensingDataHomeInt {
 	public void attachClean(SensingData instance) {
 		log.debug("attaching clean SensingData instance");
 		try {
-			sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
+			getHibernateTemplate().lock(instance, LockMode.NONE);
 			log.debug("attach successful");
 		} catch (RuntimeException re) {
 			log.error("attach failed", re);
@@ -110,7 +94,7 @@ public class SensingDataHome implements SensingDataHomeInt {
 	public void delete(SensingData persistentInstance) {
 		log.debug("deleting SensingData instance");
 		try {
-			sessionFactory.getCurrentSession().delete(persistentInstance);
+			getHibernateTemplate().delete(persistentInstance);
 			log.debug("delete successful");
 		} catch (RuntimeException re) {
 			log.error("delete failed", re);
@@ -129,8 +113,8 @@ public class SensingDataHome implements SensingDataHomeInt {
 	public SensingData merge(SensingData detachedInstance) {
 		log.debug("merging SensingData instance");
 		try {
-			SensingData result = (SensingData) sessionFactory
-					.getCurrentSession().merge(detachedInstance);
+			SensingData result = (SensingData) getHibernateTemplate().merge(
+					detachedInstance);
 			log.debug("merge successful");
 			return result;
 		} catch (RuntimeException re) {
@@ -150,8 +134,8 @@ public class SensingDataHome implements SensingDataHomeInt {
 	public SensingData findById(SensingDataId id) {
 		log.debug("getting SensingData instance with id: " + id);
 		try {
-			SensingData instance = (SensingData) sessionFactory
-					.getCurrentSession().get("SensingData", (Serializable) id);
+			SensingData instance = (SensingData) getHibernateTemplate().get(
+					"SensingData", (Serializable) id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
@@ -175,9 +159,9 @@ public class SensingDataHome implements SensingDataHomeInt {
 	public List<SensingData> findByExample(SensingData instance) {
 		log.debug("finding SensingData instance by example");
 		try {
-			List<SensingData> results = (List<SensingData>) sessionFactory
-					.getCurrentSession().createCriteria("SensingData")
-					.add(create(instance)).list();
+			List<SensingData> results = (List<SensingData>) getHibernateTemplate()
+					.findByExample(instance);
+			;
 			log.debug("find by example successful, result size: "
 					+ results.size());
 			return results;
@@ -186,4 +170,71 @@ public class SensingDataHome implements SensingDataHomeInt {
 			throw re;
 		}
 	}
+
+	@Override
+	public int count() {
+		log.debug("count");
+		try {
+
+			List<SensingData> results = (List<SensingData>) getHibernateTemplate()
+					.find("From SensingData");
+			log.debug("find by example successful, result size: " + results);
+
+			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public List<SensingData> findActiveSensing() {
+		log.debug("finding SensingData instance by example");
+		try {
+			List<SensingData> results = (List<SensingData>) getHibernateTemplate()
+					.find("From SensingData where timeEnd = null");
+			;
+			log.debug("find by example successful, result size: "
+					+ results.size());
+			return results;
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public int countByUser(Integer user) {
+		log.debug("count");
+		try {
+
+			List<SensingData> results = (List<SensingData>) getHibernateTemplate()
+					.find("From SensingData where userProfileIdUserProfile =?",
+							user);
+			log.debug("find by example successful, result size: " + results);
+
+			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public int countBySensor(Integer sensor) {
+		log.debug("count");
+		try {
+
+			List<SensingData> results = (List<SensingData>) getHibernateTemplate()
+					.find("From SensingData where id.sensorNodeIdSensorNode =?",
+							sensor);
+			log.debug("find by example successful, result size: " + results);
+
+			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
 }

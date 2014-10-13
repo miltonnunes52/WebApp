@@ -34,10 +34,10 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 <!-- 				<value>com/mkyong/customer/hibernate/ModalitiesHasSensorId.hbm.xml</value> -->
 <!-- 				<value>com/mkyong/customer/hibernate/Profile.hbm.xml</value> -->
 <!-- 				<value>com/mkyong/customer/hibernate/Real.hbm.xml</value> -->
-<!-- 				<value>com/mkyong/customer/hibernate/SensingData.hbm.xml</value> -->
+				<value>com/mkyong/customer/hibernate/SensingData.hbm.xml</value>
 <!-- 				<value>com/mkyong/customer/hibernate/SensingDataValue.hbm.xml</value> -->
 				<value>com/mkyong/customer/hibernate/Sensor.hbm.xml</value>
-<!-- 				<value>com/mkyong/customer/hibernate/SensorNode.hbm.xml</value> -->
+				<value>com/mkyong/customer/hibernate/SensorNode.hbm.xml</value>
 <!-- 				<value>com/mkyong/customer/hibernate/Study.hbm.xml</value> -->
 <!-- 				<value>com/mkyong/customer/hibernate/Tests.hbm.xml</value> -->
 <!-- 				<value>com/mkyong/customer/hibernate/Transformation.hbm.xml</value> -->

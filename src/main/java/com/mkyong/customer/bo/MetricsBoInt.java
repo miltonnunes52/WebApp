@@ -22,4 +22,6 @@ public interface MetricsBoInt {
 
 	List<Metrics> getAll();
 
+	int count();
+
 }

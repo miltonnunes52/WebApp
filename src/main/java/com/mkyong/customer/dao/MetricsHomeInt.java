@@ -22,4 +22,6 @@ public interface MetricsHomeInt {
 
 	List<Metrics> getAll();
 
+	int count();
+
 }
