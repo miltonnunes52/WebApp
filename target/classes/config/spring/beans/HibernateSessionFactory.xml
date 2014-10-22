@@ -28,7 +28,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 <!-- 				<value>com/mkyong/customer/hibernate/DataContext.hbm.xml</value> -->
 <!-- 				<value>com/mkyong/customer/hibernate/HighlevelInformation.hbm.xml</value> -->
 				<value>com/mkyong/customer/hibernate/Metrics.hbm.xml</value>
-<!-- 				<value>com/mkyong/customer/hibernate/MidlevelInformation.hbm.xml</value> -->
+				<value>com/mkyong/customer/hibernate/MidlevelInformation.hbm.xml</value>
 <!-- 				<value>com/mkyong/customer/hibernate/Modalities.hbm.xml</value> -->
 <!-- 				<value>com/mkyong/customer/hibernate/ModalitiesHasSensor.hbm.xml</value> -->
 <!-- 				<value>com/mkyong/customer/hibernate/ModalitiesHasSensorId.hbm.xml</value> -->
@@ -44,6 +44,7 @@ http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 <!-- 				<value>com/mkyong/customer/hibernate/TransformationLevel.hbm.xml</value> -->
 				<value>com/mkyong/customer/hibernate/UserProfile.hbm.xml</value>
 <!-- 				<value>com/mkyong/customer/hibernate/ValueUnits.hbm.xml</value> -->
+
 			</list>
 		</property>
 

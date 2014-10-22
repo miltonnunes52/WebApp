@@ -196,15 +196,40 @@
 								<th />
 							</tr>
 							<tr>
-								<th><select>
-										<option value="#">Rato</option>
-								</select></th>
-								<th><select>
-										<option value="#">Absolute Angles</option>
-								</select></th>
-								<th><select>
-										<option value="#">13-08-2014 09:34</option>
-								</select></th>
+
+
+
+
+
+								<h:form>
+									<th><h:selectOneMenu
+											valueChangeListener="#{metrics.valueChanged}"
+											onchange="submit()" class="input-large" id="s"
+											value="#{metrics.tipo}">
+											<f:selectItems value="#{metrics.getDataType()}" var="t"
+												itemLabel="#{t}" itemValue="#{t}" />
+										</h:selectOneMenu></th>
+								</h:form>
+								<h:form>
+									<th><h:selectOneMenu
+											valueChangeListener="#{metrics.valueChanged1}"
+											onchange="submit()" class="input-large" id="s1"
+											value="#{metrics.metrica}">
+											<f:selectItems value="#{metrics.getMetrics()}" var="m"
+												itemLabel="#{m.description}" itemValue="#{m.idMetrics}" />
+										</h:selectOneMenu></th>
+								</h:form>
+								<h:form>
+									<th><h:selectOneMenu
+											valueChangeListener="#{sensingData.valueChanged}"
+											onchange="submit()" class="input-large" id="s2"
+											value="#{sensingData.id}">
+											<f:selectItems
+												value="#{sensingData.getSensingData(login.id, metrics.tipo)}"
+												var="s" itemLabel="#{s.timeCreation}"
+												itemValue="#{sensingData.concat(s.id)}" />
+										</h:selectOneMenu></th>
+								</h:form>
 								<th></th>
 							</tr>
 						</thead>
@@ -217,7 +242,7 @@
 				<div class="module_content">
 					<div class="grid_10">
 						<div class="box round first">
-							<h2>Absolute Sum of Angles</h2>
+							<h2>#{metrics.getMetricById().description}</h2>
 							<div class="block">
 								<div id="chart1"></div>
 							</div>
@@ -238,35 +263,35 @@
 			<header>
 				<h3>Dados:</h3>
 			</header>
-			<div class="message_list">
+		<div class="message_list">
 				<div class="module_content">
 					<div class="message">
 
 						<p>
 							<strong>Média: </strong>
 						</p>
-						<p>5376.298299</p>
+						<p>#{tableBean.calcAverage(sensingData.getSensing(), metrics.metrica)}</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Desvio Padrão: </strong>
 						</p>
-						<p>6176.427208</p>
+						<p>#{tableBean.stdDev(sensingData.getSensing(), metrics.metrica)}</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Data Início: </strong>
 						</p>
-						<p>13-08-2014 09:34:52</p>
+						<p>#{sensingData.getTimes(login.id, metrics.tipo).timeCreation}</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Data Fim: </strong>
 						</p>
-						<p>13-08-2014 12:24:12</p>
+						<p>#{sensingData.getTimes(login.id, metrics.tipo).timeEnd}</p>
 					</div>
 				</div>
 			</div>

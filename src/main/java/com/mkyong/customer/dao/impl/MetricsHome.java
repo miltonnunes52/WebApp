@@ -129,14 +129,14 @@ public class MetricsHome extends HibernateDaoSupport implements MetricsHomeInt {
 	public Metrics findById(java.lang.Integer id) {
 		log.debug("getting Metrics instance with id: " + id);
 		try {
-			Metrics instance = (Metrics) getHibernateTemplate().get("Metrics",
-					id);
+			List<Metrics> instance = (List<Metrics>) getHibernateTemplate()
+					.find("From Metrics where idMetrics = ?", id);
 			if (instance == null) {
 				log.debug("get successful, no instance found");
 			} else {
 				log.debug("get successful, instance found");
 			}
-			return instance;
+			return instance.get(0);
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
@@ -195,4 +195,37 @@ public class MetricsHome extends HibernateDaoSupport implements MetricsHomeInt {
 			throw re;
 		}
 	}
+
+	@Override
+	public List<Metrics> metricsByType(String type) {
+		log.debug("count");
+		try {
+
+			List<Metrics> results = (List<Metrics>) getHibernateTemplate()
+					.find("From Metrics m where m.type = ?", type);
+			log.debug("find by example successful, result size: " + results);
+
+			return results;
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public List<String> getTypes() {
+		log.debug("gettypes");
+		try {
+
+			List<String> results = (List<String>) getHibernateTemplate().find(
+					"Select distinct m.type From Metrics m");
+			log.debug("find by example successful, result size: " + results);
+
+			return results;
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
 }

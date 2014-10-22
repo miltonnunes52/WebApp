@@ -142,7 +142,7 @@
 		<hr />
 		<h3>Monitorização</h3>
 		<ul class="toggle">
-					<li class="icn_categories"><a href="panel.xhtml">Painel</a></li>
+			<li class="icn_categories"><a href="panel.xhtml">Painel</a></li>
 			<li class="icn_edit_article"><a href="graphs.xhtml">Gráficos</a></li>
 			<li class="icn_categories"><a href="table.xhtml">Tabelas</a></li>
 			<li class="icn_settings"><a href="usersensors.xhtml">Sensores
@@ -196,15 +196,40 @@
 								<th />
 							</tr>
 							<tr>
-								<th><select>
-										<option value="#">Rato</option>
-								</select></th>
-								<th><select>
-										<option value="#">Signed Angles</option>
-								</select></th>
-								<th><select>
-										<option value="#">24-08-2014 15:10</option>
-								</select></th>
+
+
+
+
+
+								<h:form>
+									<th><h:selectOneMenu
+											valueChangeListener="#{metrics.valueChanged}"
+											onchange="submit()" class="input-large" id="s"
+											value="#{metrics.tipo}">
+											<f:selectItems value="#{metrics.getDataType()}" var="t"
+												itemLabel="#{t}" itemValue="#{t}" />
+										</h:selectOneMenu></th>
+								</h:form>
+								<h:form>
+									<th><h:selectOneMenu
+											valueChangeListener="#{metrics.valueChanged1}"
+											onchange="submit()" class="input-large" id="s1"
+											value="#{metrics.metrica}">
+											<f:selectItems value="#{metrics.getMetrics()}" var="m"
+												itemLabel="#{m.description}" itemValue="#{m.idMetrics}" />
+										</h:selectOneMenu></th>
+								</h:form>
+								<h:form>
+									<th><h:selectOneMenu
+											valueChangeListener="#{sensingData.valueChanged}"
+											onchange="submit()" class="input-large" id="s2"
+											value="#{sensingData.id}">
+											<f:selectItems
+												value="#{sensingData.getSensingData(login.id, metrics.tipo)}"
+												var="s" itemLabel="#{s.timeCreation}"
+												itemValue="#{sensingData.concat(s.id)}" />
+										</h:selectOneMenu></th>
+								</h:form>
 								<th></th>
 							</tr>
 						</thead>
@@ -216,76 +241,21 @@
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td>111</td>
-								<td>63520211230016</td>
-								<td>286.2602047</td>
-							</tr>
-							<tr>
-								<td>112</td>
-								<td>63520211251855</td>
-								<td>2980.122299</td>
-							</tr>
-							<tr>
-								<td>113</td>
-								<td>63520211253170</td>
-								<td>1427.076335</td>
-							</tr>
-							<tr>
-								<td>114</td>
-								<td>63520211257030</td>
-								<td>3908.811299</td>
-							</tr>
-							<tr>
-								<td>115</td>
-								<td>63520211258718</td>
-								<td>1415.14811426914</td>
-							</tr>
-							<tr>
-								<td>116</td>
-								<td>63520212934538</td>
-								<td>1143.31061419117</td>
-							</tr>
-							<tr>
-								<td>117</td>
-								<td>63520212935234</td>
-								<td>311.118384906168</td>
-							</tr>
-							<tr>
-								<td>118</td>
-								<td>63520212941618</td>
-								<td>12189.1402587718</td>
-							</tr>
-							<tr>
-								<td>119</td>
-								<td>63520212942146</td>
-								<td>1358.487838</td>
-							</tr>
-							<tr>
-								<td>120</td>
-								<td>63520212944519</td>
-								<td>892.1673089</td>
-							</tr>
-							<tr>
-								<td>121</td>
-								<td>63520212945434</td>
-								<td>1229.365432</td>
-							</tr>
-							<tr>
-								<td>122</td>
-								<td>63520212949424</td>
-								<td>1131.817377</td>
-							</tr>
-							<tr>
-								<td>123</td>
-								<td>63520212974567</td>
-								<td>967.823478</td>
-							</tr>
-							<tr>
-								<td>121</td>
-								<td>63520212126532</td>
-								<td>891.72348</td>
-							</tr>
+							<ui:repeat var="data"
+								value="#{tableBean.getTable(sensingData.getSensing(), metrics.metrica)}">
+								<ui:repeat var="datasplit"
+									value="#{tableBean.splitData(data.description)}">
+
+									<tr>
+
+										<td>#{data.idMidlevelInformation}</td>
+										<td>#{tableBean.getData(datasplit)}</td>
+										<td>#{tableBean.getResult(datasplit)}</td>
+
+
+									</tr>
+								</ui:repeat>
+							</ui:repeat>
 						</tbody>
 					</table>
 				</div>
@@ -309,28 +279,28 @@
 						<p>
 							<strong>Média: </strong>
 						</p>
-						<p>1347.12353</p>
+						<p>#{tableBean.calcAverage(sensingData.getSensing(), metrics.metrica)}</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Desvio Padrão: </strong>
 						</p>
-						<p>3457.37644</p>
+						<p>#{tableBean.stdDev(sensingData.getSensing(), metrics.metrica)}</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Data Início: </strong>
 						</p>
-						<p>24-08-2014 15:10:05</p>
+						<p>#{sensingData.getTimes(login.id, metrics.tipo).timeCreation}</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Data Fim: </strong>
 						</p>
-						<p>24-08-2014 19:37:21</p>
+						<p>#{sensingData.getTimes(login.id, metrics.tipo).timeEnd}</p>
 					</div>
 				</div>
 			</div>

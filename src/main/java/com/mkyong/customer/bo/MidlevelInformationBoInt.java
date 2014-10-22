@@ -20,4 +20,7 @@ public interface MidlevelInformationBoInt {
 
 	List<MidlevelInformation> findByExample(MidlevelInformation instance);
 
+	List<MidlevelInformation> getMidLevelByIDSensing(int idsensing,
+			int idsensornode, int metrica);
+
 }

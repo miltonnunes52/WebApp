@@ -52,4 +52,12 @@ public class MidlevelInformationBo implements MidlevelInformationBoInt {
 		return midlevelInformationHomeInt.findByExample(instance);
 	}
 
+	@Override
+	public List<MidlevelInformation> getMidLevelByIDSensing(int idsensing,
+			int idsensornode, int metrica) {
+		// TODO Auto-generated method stub
+		return midlevelInformationHomeInt.getMidLevelByIDSensing(idsensing,
+				idsensornode, metrica);
+	}
+
 }

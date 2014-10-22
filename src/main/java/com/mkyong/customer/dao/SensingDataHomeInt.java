@@ -29,4 +29,6 @@ public interface SensingDataHomeInt {
 
 	int countBySensor(Integer sensor);
 
+	List<SensingData> getSensingDataByUserAndMetric(Integer user, String type);
+
 }

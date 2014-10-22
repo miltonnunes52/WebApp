@@ -61,4 +61,17 @@ public class MetricsBo implements MetricsBoInt {
 		// TODO Auto-generated method stub
 		return metricsHomeInt.count();
 	}
+
+	@Override
+	public List<Metrics> metricsByType(String type) {
+		// TODO Auto-generated method stub
+		return metricsHomeInt.metricsByType(type);
+	}
+
+	@Override
+	public List<String> getTypes() {
+		// TODO Auto-generated method stub
+		return metricsHomeInt.getTypes();
+	}
+
 }

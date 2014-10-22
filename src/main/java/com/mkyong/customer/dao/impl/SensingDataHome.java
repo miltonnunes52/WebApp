@@ -3,7 +3,6 @@ package com.mkyong.customer.dao.impl;
 // default package
 // Generated 10/Out/2014 16:22:13 by Hibernate Tools 3.6.0
 
-import java.io.Serializable;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -133,15 +132,15 @@ public class SensingDataHome extends HibernateDaoSupport implements
 	@Override
 	public SensingData findById(SensingDataId id) {
 		log.debug("getting SensingData instance with id: " + id);
+		Object[] params = { id.getIdSensing(), id.getSensorNodeIdSensorNode() };
 		try {
-			SensingData instance = (SensingData) getHibernateTemplate().get(
-					"SensingData", (Serializable) id);
-			if (instance == null) {
-				log.debug("get successful, no instance found");
-			} else {
-				log.debug("get successful, instance found");
-			}
-			return instance;
+			List<SensingData> results = (List<SensingData>) getHibernateTemplate()
+					.find("Select sd From SensingData sd where sd.id.idSensing = ? and sd.id.sensorNodeIdSensorNode = ?",
+							params);
+
+			log.debug("find by example successful, result size: "
+					+ results.size());
+			return results.get(0);
 		} catch (RuntimeException re) {
 			log.error("get failed", re);
 			throw re;
@@ -231,6 +230,25 @@ public class SensingDataHome extends HibernateDaoSupport implements
 			log.debug("find by example successful, result size: " + results);
 
 			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public List<SensingData> getSensingDataByUserAndMetric(Integer user,
+			String type) {
+		log.debug("finding SensingData instance by example");
+		try {
+			Object[] params = { user, type };
+			List<SensingData> results = (List<SensingData>) getHibernateTemplate()
+					.find("Select sd From SensingData sd, SensorNode sn, Sensor s where sd.userProfileIdUserProfile = ? and sd.id.sensorNodeIdSensorNode = sn.idSensorNode and sn.sensorIdSensor = s.idSensor and s.type = ?",
+							params);
+
+			log.debug("find by example successful, result size: "
+					+ results.size());
+			return results;
 		} catch (RuntimeException re) {
 			log.error("find by example failed", re);
 			throw re;

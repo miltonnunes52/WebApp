@@ -194,20 +194,20 @@
 								<table class="form">
 
 									<tr>
-										<td><label>Username</label></td>
+										<td><label>Username: </label></td>
 										<td><h:inputText id="username"
 												value="#{login.userLogin.username}" /></td>
 									</tr>
 
 									<tr>
-										<td><label>Password</label></td>
+										<td><label>Password: </label></td>
 										<td><h:inputText id="password"
 												value="#{login.userLogin.password}" /></td>
 									</tr>
 
 									<tr>
-										<td><label>Número de Monitorizações</label></td>
-										<td><h:inputText value="Falta isto!" /></td>
+										<td><label>Número de Monitorizações: </label></td>
+										<td><label>#{sensingData.countByUser(login.id)}</label></td>
 									</tr>
 
 

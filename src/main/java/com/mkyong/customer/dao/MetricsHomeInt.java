@@ -24,4 +24,8 @@ public interface MetricsHomeInt {
 
 	int count();
 
+	List<Metrics> metricsByType(String type);
+
+	List<String> getTypes();
+
 }
