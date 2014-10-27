@@ -1,7 +1,10 @@
 package com.mkyong;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import java.util.Locale;
 
 import com.mkyong.customer.bo.MidlevelInformationBoInt;
 import com.mkyong.customer.model.MidlevelInformation;
@@ -22,6 +25,8 @@ public class TableBean implements Serializable {
 
 	public List<MidlevelInformation> getTable(SensingDataId idsensing,
 			String metrica) {
+		if (idsensing == null)
+			return new ArrayList<MidlevelInformation>();
 		List<MidlevelInformation> list = midlevelInformationBoInt
 				.getMidLevelByIDSensing(idsensing.getIdSensing(),
 						idsensing.getSensorNodeIdSensorNode(),
@@ -90,5 +95,53 @@ public class TableBean implements Serializable {
 		float stdDev = (float) Math.sqrt(variance);
 
 		return stdDev;
+	}
+
+	public String getGraphValues(SensingDataId idsensing, String metrica) {
+		List<MidlevelInformation> list = getTable(idsensing, metrica);
+		if (list.isEmpty()) {
+
+			return "";
+		}
+
+		String s = "";
+
+		for (MidlevelInformation m : list) {
+			String reg = m.getDescription();
+			String[] subreg = splitData(reg);
+			for (String r : subreg) {
+				if (s.isEmpty())
+					s = getResult(r);
+				else
+					s = s.concat(",").concat(getResult(r));
+			}
+		}
+		System.out.println("getGraphValues " + s);
+
+		return s;
+
+	}
+
+	public String getDaysOfWeek() {
+		String days = "";
+		Calendar cal = Calendar.getInstance();
+		Locale locale = Locale.getDefault();
+
+		cal.add(Calendar.DAY_OF_YEAR, -6);
+		for (int i = 0; i < 7; i++) {
+			if (days.isEmpty())
+
+				days = days.concat(cal.getDisplayName(Calendar.DAY_OF_WEEK,
+						Calendar.LONG, locale).split("-")[0]);
+			else {
+				days = days.concat(",");
+				days = days.concat(cal.getDisplayName(Calendar.DAY_OF_WEEK,
+						Calendar.LONG, locale).split("-")[0]);
+			}
+			cal.add(Calendar.DAY_OF_YEAR, +1);
+
+		}
+
+		return days;
 	}
 }

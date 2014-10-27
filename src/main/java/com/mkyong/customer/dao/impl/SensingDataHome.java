@@ -255,4 +255,40 @@ public class SensingDataHome extends HibernateDaoSupport implements
 		}
 	}
 
+	@Override
+	public int countByTypeAndData(String type, String data) {
+		log.debug("finding SensingData instance by example");
+		try {
+			Object[] params = { "%" + data + "%", type };
+			List<SensingData> results = (List<SensingData>) getHibernateTemplate()
+					.find("Select sd From SensingData sd, SensorNode sn, Sensor s where sd.timeCreation like ? and sd.id.sensorNodeIdSensorNode = sn.idSensorNode and sn.sensorIdSensor = s.idSensor and s.type = ?",
+							params);
+
+			log.debug("find by example successful, result size: "
+					+ results.size());
+			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
+	@Override
+	public int countByTypeAndDataAndUser(String type, String data, Integer user) {
+		log.debug("finding SensingData instance by example");
+		try {
+			Object[] params = { "%" + data + "%", user, type };
+			List<SensingData> results = (List<SensingData>) getHibernateTemplate()
+					.find("Select sd From SensingData sd, SensorNode sn, Sensor s where sd.timeCreation like ? and sd.userProfileIdUserProfile = ? and sd.id.sensorNodeIdSensorNode = sn.idSensorNode and sn.sensorIdSensor = s.idSensor and s.type = ?",
+							params);
+
+			log.debug("find by example successful, result size: "
+					+ results.size());
+			return results.size();
+		} catch (RuntimeException re) {
+			log.error("find by example failed", re);
+			throw re;
+		}
+	}
+
 }

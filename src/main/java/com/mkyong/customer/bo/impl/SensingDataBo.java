@@ -83,4 +83,16 @@ public class SensingDataBo implements SensingDataBoInt {
 		return sensingDataHomeInt.getSensingDataByUserAndMetric(user, type);
 	}
 
+	@Override
+	public int countByTypeAndData(String type, String data) {
+		// TODO Auto-generated method stub
+		return sensingDataHomeInt.countByTypeAndData(type, data);
+	}
+
+	@Override
+	public int countByTypeAndDataAndUser(String type, String data, Integer user) {
+		// TODO Auto-generated method stub
+		return sensingDataHomeInt.countByTypeAndDataAndUser(type, data, user);
+	}
+
 }

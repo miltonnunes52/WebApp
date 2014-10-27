@@ -120,9 +120,9 @@
 	<section id="secondary_bar">
 		<div class="user">
 			<p>
-				<a href="#">miltonnunes</a>
+				<a href="#">#{login.userLogin.username}</a>
 			</p>
-			<a class="logout_user" href="#" title="Logout">Logout</a>
+			<a class="logout_user" href="/WebApp/login.xhtml"  title="Logout">Logout</a>
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
@@ -142,7 +142,7 @@
 		<hr />
 		<h3>Monitorização</h3>
 		<ul class="toggle">
-					<li class="icn_categories"><a href="panel.xhtml">Painel</a></li>
+					<li class="icn_categories"><a href="home.xhtml">Painel</a></li>
 			<li class="icn_edit_article"><a href="graphs.xhtml">Gráficos</a></li>
 			<li class="icn_categories"><a href="table.xhtml">Tabelas</a></li>
 			<li class="icn_settings"><a href="usersensors.xhtml">Sensores
@@ -155,15 +155,17 @@
 					Utilizador</a></li>
 		</ul>
 
-		<h3>Administração</h3>
-		<ul class="toggle">
-			<li class="icn_categories"><a href="panel.xhtml">Painel</a></li>
-			<li class="icn_view_users"><a href="users.xhtml">Utilizadores</a></li>
-			<li class="icn_settings"><a href="sensors.xhtml">Sensores
-					Utilizados</a></li>
-			<li class="icn_jump_back"><a href="metrics.xhtml">Métricas</a></li>
+		<c:if test="${login.id == 123 || login.id == 125}">
+			<h3>Administração</h3>
+			<ul class="toggle">
+				<li class="icn_categories"><a href="panel.xhtml">Painel</a></li>
+				<li class="icn_view_users"><a href="users.xhtml">Utilizadores</a></li>
+				<li class="icn_settings"><a href="sensors.xhtml">Sensores
+						Utilizados</a></li>
+				<li class="icn_jump_back"><a href="metrics.xhtml">Métricas</a></li>
 
-		</ul>
+			</ul>
+		</c:if>
 
 		<footer>
 			<hr />
@@ -244,7 +246,11 @@
 						<div class="box round first">
 							<h2>#{metrics.getMetricById().description}</h2>
 							<div class="block">
+							 <h:form id="form1">
+							
 								<div id="chart1"></div>
+								<h:inputHidden id="values" value="#{tableBean.getGraphValues(sensingData.getSensing(), metrics.metrica)}"/>
+								</h:form>
 							</div>
 						</div>
 					</div>

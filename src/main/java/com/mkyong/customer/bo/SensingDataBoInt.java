@@ -31,4 +31,8 @@ public interface SensingDataBoInt {
 
 	List<SensingData> getSensingDataByUserAndMetric(Integer user, String type);
 
+	int countByTypeAndData(String type, String data);
+
+	int countByTypeAndDataAndUser(String type, String data, Integer user);
+
 }

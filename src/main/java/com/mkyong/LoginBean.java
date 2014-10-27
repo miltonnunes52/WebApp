@@ -12,6 +12,16 @@ public class LoginBean implements Serializable {
 	private String username;
 	private String password;
 
+	private String rpassword;
+
+	public String getRpassword() {
+		return rpassword;
+	}
+
+	public void setRpassword(String rpassword) {
+		this.rpassword = rpassword;
+	}
+
 	private String id;
 
 	private UserProfile userLogin = null;
@@ -63,7 +73,27 @@ public class LoginBean implements Serializable {
 
 	}
 
+	public boolean register() {
+		if (!password.equals(rpassword))
+			return false;
+		UserProfile up1 = new UserProfile(username, password);
+		getUserProfileBoInt().persist(up1);
+		UserProfile up = getUserProfileBoInt().getCredentials(username,
+				password);
+		if (up != null) {
+			setUserLogin(up);
+			setId(up.getIdUserProfile().toString());
+			System.out.println("login :)");
+			return true;
+		} else {
+			System.out.println("login :(");
+			return false;
+		}
+
+	}
+
 	public void doLogout() {
+		System.out.println("logout");
 		setUserLogin(null);
 		setId(null);
 	}

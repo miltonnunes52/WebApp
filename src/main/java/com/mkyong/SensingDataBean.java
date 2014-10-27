@@ -1,6 +1,9 @@
 package com.mkyong;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 
 import javax.faces.event.ValueChangeEvent;
@@ -114,5 +117,63 @@ public class SensingDataBean implements Serializable {
 			return new SensingData();
 		}
 		return sensingDataBoInt.findById(sensing);
+	}
+
+	public String countDays(String type) {
+
+		String total = "";
+
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+		Calendar cal = Calendar.getInstance();
+
+		cal.add(Calendar.DAY_OF_YEAR, -6);
+		for (int i = 0; i < 7; i++) {
+			if (total.isEmpty())
+				total = total.concat(new Integer(sensingDataBoInt
+						.countByTypeAndData(type,
+								dateFormat.format(cal.getTime()))).toString());
+			else {
+				total = total.concat(",");
+				total = total.concat(new Integer(sensingDataBoInt
+						.countByTypeAndData(type,
+								dateFormat.format(cal.getTime()))).toString());
+			}
+			cal.add(Calendar.DAY_OF_YEAR, +1);
+
+		}
+
+		System.out.println(type + " " + total);
+		return total;
+	}
+
+	public String countDaysByUser(String type, Integer user) {
+
+		String total = "";
+
+		DateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+		Calendar cal = Calendar.getInstance();
+
+		cal.add(Calendar.DAY_OF_YEAR, -6);
+		for (int i = 0; i < 7; i++) {
+			if (total.isEmpty())
+				total = total.concat(new Integer(sensingDataBoInt
+						.countByTypeAndDataAndUser(type,
+								dateFormat.format(cal.getTime()), user))
+						.toString());
+			else {
+				total = total.concat(",");
+				total = total.concat(new Integer(sensingDataBoInt
+						.countByTypeAndDataAndUser(type,
+								dateFormat.format(cal.getTime()), user))
+						.toString());
+			}
+			cal.add(Calendar.DAY_OF_YEAR, +1);
+
+		}
+
+		System.out.println(type + " " + total);
+		return total;
 	}
 }
