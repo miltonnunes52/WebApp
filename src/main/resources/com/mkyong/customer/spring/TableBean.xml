@@ -11,5 +11,13 @@
 	<bean id="midlevelInformationHomeInt" class="com.mkyong.customer.dao.impl.MidlevelInformationHome">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	
+	<bean id="sensingDataValueBoInt" class="com.mkyong.customer.bo.impl.SensingDataValueBo">
+		<property name="sensingDataValueHomeInt" ref="sensingDataValueHomeInt" />
+	</bean>
+
+	<bean id="sensingDataValueHomeInt" class="com.mkyong.customer.dao.impl.SensingDataValueHome">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 
 </beans>

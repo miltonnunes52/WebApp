@@ -122,7 +122,7 @@
 			<p>
 				<a href="#">#{login.userLogin.username}</a>
 			</p>
-			<a class="logout_user" href="/WebApp/login.xhtml"  title="Logout">Logout</a>
+			<a class="logout_user" href="/WebApp/login.xhtml" title="Logout">Logout</a>
 		</div>
 		<div class="breadcrumbs_container">
 			<article class="breadcrumbs">
@@ -202,7 +202,6 @@
 
 
 
-
 								<h:form>
 									<th><h:selectOneMenu
 											valueChangeListener="#{metrics.valueChanged}"
@@ -210,6 +209,8 @@
 											value="#{metrics.tipo}">
 											<f:selectItems value="#{metrics.getDataType()}" var="t"
 												itemLabel="#{t}" itemValue="#{t}" />
+											<f:valueChangeListener binding="#{sensingData.reset()}" />
+
 										</h:selectOneMenu></th>
 								</h:form>
 								<h:form>
@@ -243,21 +244,56 @@
 							</tr>
 						</thead>
 						<tbody>
-							<ui:repeat var="data"
-								value="#{tableBean.getTable(sensingData.getSensing(), metrics.metrica)}">
-								<ui:repeat var="datasplit"
-									value="#{tableBean.splitData(data.description)}">
 
-									<tr>
-
-										<td>#{data.idMidlevelInformation}</td>
-										<td>#{tableBean.getData(datasplit)}</td>
-										<td>#{tableBean.getResult(datasplit)}</td>
+							<h:form>
 
 
-									</tr>
+
+
+
+								<ui:repeat var="data"
+									value="#{tableBean.getTable(sensingData.getSensing(), metrics.metrica)}">
+									<ui:repeat var="datasplit"
+										value="#{tableBean.splitData(data.description)}">
+
+										<tr>
+
+											<td>#{data.idMidlevelInformation}</td>
+											<td>#{tableBean.getData(datasplit)}</td>
+											<td>#{tableBean.getResult(datasplit)}</td>
+
+
+										</tr>
+									</ui:repeat>
 								</ui:repeat>
-							</ui:repeat>
+
+
+							</h:form>
+
+
+
+							<h:form>
+								<c:if 
+									test="${tableBean.getTable(sensingData.getSensing(), metrics.metrica).size() == 0 }">
+									<ui:repeat var="data"
+										value="#{tableBean.rawData(sensingData.getSensing())}">
+										<ui:repeat var="datasplit"
+											value="#{tableBean.splitData(data.value)}">
+
+											<tr>
+
+												<td>#{data.idSensingDataValue}</td>
+												<td>Raw Data</td>
+												<td>#{datasplit}</td>
+
+
+											</tr>
+										</ui:repeat>
+									</ui:repeat>
+								</c:if>
+							</h:form>
+
+
 						</tbody>
 					</table>
 				</div>
@@ -281,21 +317,24 @@
 						<p>
 							<strong>Média: </strong>
 						</p>
-						<p>#{tableBean.calcAverage(sensingData.getSensing(), metrics.metrica)}</p>
+						<p>#{tableBean.calcAverage(sensingData.getSensing(),
+							metrics.metrica)}</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Desvio Padrão: </strong>
 						</p>
-						<p>#{tableBean.stdDev(sensingData.getSensing(), metrics.metrica)}</p>
+						<p>#{tableBean.stdDev(sensingData.getSensing(),
+							metrics.metrica)}</p>
 					</div>
 					<div class="message">
 
 						<p>
 							<strong>Data Início: </strong>
 						</p>
-						<p>#{sensingData.getTimes(login.id, metrics.tipo).timeCreation}</p>
+						<p>#{sensingData.getTimes(login.id,
+							metrics.tipo).timeCreation}</p>
 					</div>
 					<div class="message">
 

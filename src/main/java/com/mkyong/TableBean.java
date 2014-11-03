@@ -7,12 +7,25 @@ import java.util.List;
 import java.util.Locale;
 
 import com.mkyong.customer.bo.MidlevelInformationBoInt;
+import com.mkyong.customer.bo.SensingDataValueBoInt;
 import com.mkyong.customer.model.MidlevelInformation;
 import com.mkyong.customer.model.SensingDataId;
+import com.mkyong.customer.model.SensingDataValue;
 
 public class TableBean implements Serializable {
 
 	private MidlevelInformationBoInt midlevelInformationBoInt;
+
+	private SensingDataValueBoInt sensingDataValueBoInt;
+
+	public SensingDataValueBoInt getSensingDataValueBoInt() {
+		return sensingDataValueBoInt;
+	}
+
+	public void setSensingDataValueBoInt(
+			SensingDataValueBoInt sensingDataValueBoInt) {
+		this.sensingDataValueBoInt = sensingDataValueBoInt;
+	}
 
 	public MidlevelInformationBoInt getMidlevelInformationBoInt() {
 		return midlevelInformationBoInt;
@@ -25,13 +38,35 @@ public class TableBean implements Serializable {
 
 	public List<MidlevelInformation> getTable(SensingDataId idsensing,
 			String metrica) {
-		if (idsensing == null)
+		if (idsensing == null || (metrica.isEmpty() || metrica == null)) {
+			System.out.println("something null");
+
 			return new ArrayList<MidlevelInformation>();
+		}
 		List<MidlevelInformation> list = midlevelInformationBoInt
 				.getMidLevelByIDSensing(idsensing.getIdSensing(),
 						idsensing.getSensorNodeIdSensorNode(),
 						Integer.parseInt(metrica));
+
+		System.out.println("table size " + list.size());
 		return list;
+	}
+
+	public boolean tableEmpty(SensingDataId idsensing, String metrica) {
+
+		System.out.println(idsensing);
+		System.out.println(metrica);
+
+		List<MidlevelInformation> l = getTable(idsensing, metrica);
+		System.out.println("tableempty size " + l.size());
+		boolean t;
+		if (l.size() == 0)
+			t = true;
+		else
+			t = false;
+		System.out.println("boolean " + t);
+
+		return t;
 	}
 
 	public String getData(String data) {
@@ -143,5 +178,15 @@ public class TableBean implements Serializable {
 		}
 
 		return days;
+	}
+
+	public List<SensingDataValue> rawData(SensingDataId idsensing) {
+		if (idsensing == null)
+			return new ArrayList<SensingDataValue>();
+		List<SensingDataValue> list = sensingDataValueBoInt
+				.getValues(idsensing.getIdSensing(),
+						idsensing.getSensorNodeIdSensorNode());
+
+		return list;
 	}
 }

@@ -20,4 +20,6 @@ public interface SensingDataValueBoInt {
 
 	List<SensingDataValue> findByExample(SensingDataValue instance);
 
+	List<SensingDataValue> getValues(Integer sensing, Integer sensorNode);
+
 }

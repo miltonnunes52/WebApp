@@ -80,6 +80,10 @@
 			<property-name>midlevelInformationBoInt</property-name>
 			<value>#{midlevelInformationBoInt}</value>
 		</managed-property>
+		<managed-property>
+			<property-name>sensingDataValueBoInt</property-name>
+			<value>#{sensingDataValueBoInt}</value>
+		</managed-property>
 	</managed-bean>
 	
 	<navigation-rule>  

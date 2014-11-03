@@ -52,4 +52,10 @@ public class SensingDataValueBo implements SensingDataValueBoInt {
 		return sensingDataValueHomeInt.findByExample(instance);
 	}
 
+	@Override
+	public List<SensingDataValue> getValues(Integer sensing, Integer sensorNode) {
+		// TODO Auto-generated method stub
+		return sensingDataValueHomeInt.getValues(sensing, sensorNode);
+	}
+
 }

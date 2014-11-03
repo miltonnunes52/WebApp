@@ -55,6 +55,10 @@ public class SensingDataBean implements Serializable {
 		List<SensingData> list = getSensingDataBoInt()
 				.getSensingDataByUserAndMetric(user, type);
 
+		if (list.size() == 0) {
+			id = "";
+			setSensing(null);
+		}
 		if (sensing == null && list.size() > 0) {
 			Object o = list.get(0);
 			SensingData sd = (SensingData) o;
@@ -103,6 +107,7 @@ public class SensingDataBean implements Serializable {
 	}
 
 	public SensingDataId getSensing() {
+		// sensing = separateId();
 		return sensing;
 	}
 
@@ -176,4 +181,11 @@ public class SensingDataBean implements Serializable {
 		System.out.println(type + " " + total);
 		return total;
 	}
+
+	public void reset() {
+		setSensing(null);
+		id = "";
+
+	}
+
 }

@@ -71,6 +71,7 @@ public class MetricsBean implements Serializable {
 
 	public void valueChanged(ValueChangeEvent event) {
 		setMetrica(null);
+
 		System.out.println("tipo " + this.tipo.toString());
 		// do your stuff
 	}
